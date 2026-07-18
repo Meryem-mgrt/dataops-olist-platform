@@ -1,18 +1,15 @@
 services:
-  postgres:
+  postgres_dw:
     image: postgres:13
-    container_name: postgres_db
-
+    container_name: postgres_dw # c'est notre Data Warehouse, pas celui d'Airflow
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
-
+      POSTGRES_USER: dataops_user
+      POSTGRES_PASSWORD: dataops_pass
+      POSTGRES_DB: dataops_dw
     ports:
-      - "5432:5432"
-
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-dw-volume:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  postgres-dw-volume:
