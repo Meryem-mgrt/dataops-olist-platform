@@ -1,7 +1,7 @@
 services:
   postgres_dw:
     image: postgres:13
-    container_name: postgres_dw # c'est notre Data Warehouse, pas celui d'Airflow
+    container_name: postgres_dw
     environment:
       POSTGRES_USER: dataops_user
       POSTGRES_PASSWORD: dataops_pass
@@ -10,6 +10,15 @@ services:
       - "5433:5432"
     volumes:
       - postgres-dw-volume:/var/lib/postgresql/data
+
+  dbt:
+    build: ./dbt
+    container_name: dbt
+    volumes:
+      - ./dbt:/usr/app/dbt
+    depends_on:
+      - postgres_dw
+    entrypoint: ["tail", "-f", "/dev/null"]
 
 volumes:
   postgres-dw-volume:
