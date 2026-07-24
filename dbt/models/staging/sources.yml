@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      - name: raw_customers
+      - name: raw_orders
+      - name: raw_order_items
+      - name: raw_order_payments
+      - name: raw_products
+      - name: raw_sellers

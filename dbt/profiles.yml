@@ -1,3 +1,4 @@
+# dit à dbt comment se connecter à PostgreSQL
 dataops_olist:
   target: dev
   outputs:
