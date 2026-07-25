@@ -58,11 +58,17 @@ def load_csv_to_postgres(filename, table_name):
 
     logger.info(f"{len(df)} lignes chargées avec succès dans {table_name}")
 
-
+def task_failure_alert(context):
+    task_instance = context.get('task_instance')
+    logger.error(
+        f"[ALERTE] Échec de la tâche '{task_instance.task_id}' "
+        f"dans le DAG '{task_instance.dag_id}' à {context.get('execution_date')}"
+    )
 default_args = {
     "owner": "meryem",
     "retries": 2,
     "retry_delay": timedelta(minutes=2),
+    "on_failure_callback": task_failure_alert,
 }
 
 with DAG(
