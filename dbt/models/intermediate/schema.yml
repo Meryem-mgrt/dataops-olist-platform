@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_order_items_summary
+    description: "Agrégation des articles par commande"
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_order_payments_summary
+    description: "Agrégation des paiements par commande"
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_orders_enriched
+    description: "Commandes enrichies avec les informations client et les délais de livraison"
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null

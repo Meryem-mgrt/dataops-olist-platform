@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: mart_sales_summary
+    description: "Table finale des ventes : une ligne par commande, prête pour l'analyse (client, montants, délais, paiement)"
+    columns:
+      - name: order_id
+        description: "Identifiant unique de la commande"
+        data_tests:
+          - unique
+          - not_null
