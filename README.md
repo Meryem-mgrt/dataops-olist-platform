@@ -15,3 +15,8 @@ Dataset : [Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/b
 
 ## Statut du projet
 En cours de développement — stage PFA (Zenithsoft, 2026)
+
+## Dashboard
+Un dashboard Power BI (`powerbi/Dashboard_DataOps_Olist.pbix`) se connecte à la table
+`mart_sales_summary` et présente : le chiffre d'affaires total, la répartition par État,
+les moyens de paiement, et le délai de livraison moyen.
