@@ -8,7 +8,7 @@ plugins/__pycache__/
 **/__pycache__/
 *.pyc
 
-# Données brutes volumineuses (trop lourdes pour Git, garder juste un exemple)
+# Données brutes volumineuses (trop lourdes pour Git)
 data/raw/*.csv
 !data/raw/sample.csv
 
