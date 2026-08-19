@@ -1,7 +1,7 @@
 import os                  # Permet de manipuler les fichiers et dossiers
 import logging             # Permet d'écrire des messages dans les logs d'Airflow
 
-from airflow import DAG# Importe la classe DAG qui permet de créer un workflow Airflow
+from airflow import DAG   # Importe la classe DAG qui permet de créer un workflow Airflow
 
 from airflow.operators.python import PythonOperator # Permet de créer une tâche qui exécute une fonction Python
 
@@ -12,6 +12,7 @@ from datetime import datetime, timedelta # timedelta : pour gérer les délais e
 import pandas as pd # Bibliothèque utilisée pour lire et manipuler les fichiers CSV
 
 from sqlalchemy import create_engine # Permet de créer une connexion entre Python et PostgreSQL
+from sqlalchemy import text
 
 DW_CONN = "postgresql://dataops_user:dataops_pass@host.docker.internal:5433/dataops_dw" #Connexion au Data Warehouse
 
@@ -32,27 +33,24 @@ logger = logging.getLogger(__name__)
 def load_csv_to_postgres(filename, table_name):
     filepath = f"{DATA_DIR}/{filename}"
 
-    # 1. Vérifier que le fichier existe avant de faire quoi que ce soit
     if not os.path.exists(filepath):
-        raise AirflowException(
-            f"Fichier introuvable : {filepath}. "
-            f"Vérifie qu'il est bien présent dans data/raw/."
-        )
+        raise AirflowException(f"Fichier introuvable : {filepath}.")
 
-    # 2. Lire le CSV, avec un message d'erreur clair si le format est invalide
     try:
         df = pd.read_csv(filepath)
     except Exception as e:
         raise AirflowException(f"Erreur de lecture du fichier {filename} : {e}")
 
-    # 3. Vérifier que le fichier n'est pas vide
     if df.empty:
         raise AirflowException(f"Le fichier {filename} est vide, chargement annulé.")
 
-    # 4. Charger dans PostgreSQL
     try:
         engine = create_engine(DW_CONN)
-        df.to_sql(table_name, engine, if_exists="replace", index=False)
+        with engine.begin() as conn:
+            # On vide la table (TRUNCATE) plutôt que de la supprimer (DROP),
+            # pour ne pas casser les vues dbt qui en dépendent
+            conn.execute(text(f'TRUNCATE TABLE "{table_name}"'))
+        df.to_sql(table_name, engine, if_exists="append", index=False)
     except Exception as e:
         raise AirflowException(f"Erreur de chargement dans {table_name} : {e}")
 
