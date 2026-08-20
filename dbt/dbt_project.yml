@@ -17,6 +17,3 @@ models:
       +materialized: view
     marts:
       +materialized: table
-seeds:
-  dataops_olist:
-    +schema: public
