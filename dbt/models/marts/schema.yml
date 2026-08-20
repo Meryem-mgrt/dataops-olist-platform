@@ -2,10 +2,54 @@ version: 2
 
 models:
   - name: mart_sales_summary
-    description: "Table finale des ventes : une ligne par commande, prête pour l'analyse (client, montants, délais, paiement)"
+    description: >
+      Table finale des ventes. Une ligne par commande, agrégeant les informations
+      client, les montants (articles, frais de port, paiements) et les délais de
+      livraison. Table destinée à la consultation via un outil de BI (Power BI).
     columns:
       - name: order_id
         description: "Identifiant unique de la commande"
         data_tests:
           - unique
           - not_null
+
+      - name: customer_id
+        description: "Identifiant du client ayant passé la commande"
+
+      - name: customer_city
+        description: "Ville du client"
+
+      - name: customer_state
+        description: "État brésilien du client (ex. SP, RJ)"
+
+      - name: status
+        description: "Statut de la commande (delivered, shipped, canceled, etc.)"
+
+      - name: purchase_ts
+        description: "Date et heure d'achat"
+
+      - name: delivery_days
+        description: "Nombre de jours entre l'achat et la livraison réelle au client"
+
+      - name: delivery_delay_days
+        description: >
+          Écart en jours entre la date de livraison réelle et la date estimée.
+          Positif = retard, négatif = livré en avance.
+
+      - name: total_items
+        description: "Nombre total d'articles dans la commande"
+
+      - name: total_items_price
+        description: "Montant total des articles (hors frais de port)"
+
+      - name: total_freight_value
+        description: "Montant total des frais de port"
+
+      - name: total_paid
+        description: "Montant total effectivement payé (tous moyens de paiement confondus)"
+
+      - name: payment_count
+        description: "Nombre de paiements distincts effectués pour cette commande"
+
+      - name: main_payment_type
+        description: "Moyen de paiement utilisé (credit_card, boleto, voucher, etc.)"

@@ -1,0 +1,50 @@
+name: dbt CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: dataops_user
+          POSTGRES_PASSWORD: dataops_pass
+          POSTGRES_DB: dataops_dw
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer dbt
+        run: pip install dbt-core==1.8.0 dbt-postgres==1.8.0
+
+      - name: Charger les données de test (seeds)
+        working-directory: ./dbt
+        run: dbt seed --profiles-dir . --target ci
+
+      - name: Exécuter les modèles dbt
+        working-directory: ./dbt
+        run: dbt run --profiles-dir . --target ci
+
+      - name: Exécuter les tests dbt
+        working-directory: ./dbt
+        run: dbt test --profiles-dir . --target ci

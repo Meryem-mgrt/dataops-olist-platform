@@ -1,0 +1,16 @@
+"product_id","product_category_name","product_name_lenght","product_description_lenght","product_photos_qty","product_weight_g","product_length_cm","product_height_cm","product_width_cm"
+"78efe838c04bbc568be034082200ac20",moveis_decoracao,57.0,272.0,1.0,2500.0,40.0,10.0,30.0
+"4aa6014eceb682077f9dc4bffebc05b0",utilidades_domesticas,43.0,1002.0,3.0,10150.0,89.0,15.0,40.0
+a5647c44af977b148e0a3a4751a09e2e,moveis_escritorio,48.0,1066.0,1.0,12160.0,56.0,51.0,28.0
+b5466db4cecf95c3c1be0ba32538ce1a,informatica_acessorios,37.0,322.0,3.0,100.0,16.0,3.0,13.0
+bd07b66896d6f1494f5b86251848ced7,moveis_escritorio,55.0,955.0,1.0,8267.0,52.0,52.0,17.0
+"124f74f703e88efe001a10bfa718b6ff",,,,,250.0,15.0,8.0,20.0
+"6b874ff4c71d18e91079b40396bf176a",automotivo,41.0,1117.0,8.0,300.0,31.0,17.0,27.0
+"08401f48b67a852d06105725c3013eff",brinquedos,58.0,739.0,5.0,350.0,28.0,10.0,12.0
+"3fc00af0f0a8d4ac2933d3900416c977",climatizacao,59.0,624.0,5.0,2000.0,20.0,10.0,20.0
+"31cddbc370031fbb839a21441df28015",beleza_saude,45.0,400.0,2.0,433.0,19.0,14.0,15.0
+"0be701e03657109a8a4d5168122777fb",esporte_lazer,32.0,282.0,2.0,4450.0,60.0,15.0,15.0
+"632ba0c3ace598871c24c49380796d57",informatica_acessorios,51.0,1245.0,1.0,2950.0,18.0,25.0,18.0
+"33f17ed3c6906f7a7ae17a0843536db4",telefonia,59.0,818.0,6.0,300.0,17.0,4.0,12.0
+"9391a573abe00141c56e38d84d7d5b3b",casa_conforto,61.0,407.0,1.0,5200.0,45.0,15.0,35.0
+a9516a079e37a9c9c36b9b78b10169e8,moveis_escritorio,41.0,1141.0,1.0,8683.0,54.0,64.0,31.0

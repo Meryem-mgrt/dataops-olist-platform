@@ -1,0 +1,16 @@
+"order_id","payment_sequential","payment_type","payment_installments","payment_value"
+"6c949e670b5d33dc8fb8ad25b6da4860",1,credit_card,10,102.47
+"8428e578bb1cf839ae26a6b7615502b9",1,credit_card,1,40.4
+"1093c8304c7a003280dd34598194913d",1,credit_card,3,36.01
+"1ebeea841c590e86a14a0d7a48e7d062",1,debit_card,1,39.1
+"951670f92359f4fe4a63112aa7306eba",1,credit_card,1,173.3
+"00e7ee1b050b8499577073aeb2a297a1",1,credit_card,2,146.87
+f86c5ed7048ac10eb88ec21c00f71892,1,credit_card,1,153.13
+"7433cbcc783205509d66a5260da5b574",1,credit_card,1,122.47
+"29150127e6685892b6eab3eec79f59c7",1,credit_card,8,335.48
+"36e694cf4cbc2a4803200c35e84abdc4",1,credit_card,1,22.77
+"83d8f70418eefd96f37b483dff430305",1,credit_card,1,117.31
+"852d2f4d37773bcbc21c8e09a05a4ea5",1,credit_card,3,36.39
+"5741ea1f91b5fbab2bd2dc653a5b5099",1,debit_card,1,282.21
+b2059ed67ce144a36e2aa97d2c9e9ad2,1,credit_card,7,157.73
+"6b7d50bd145f6fc7f33cebabd7e49d0f",1,credit_card,8,252.25

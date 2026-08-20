@@ -11,3 +11,13 @@ dataops_olist:
       dbname: dataops_dw
       schema: public
       threads: 4
+
+    ci:
+      type: postgres
+      host: localhost
+      user: dataops_user
+      password: dataops_pass
+      port: 5432
+      dbname: dataops_dw
+      schema: public
+      threads: 4
