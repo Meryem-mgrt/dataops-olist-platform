@@ -41,7 +41,7 @@ x-airflow-common:
     AIRFLOW__API_AUTH__JWT_ISSUER: ${AIRFLOW__API_AUTH__JWT_ISSUER:-airflow}
     # IMPORTANT : une seule définition de cette clé (avant il y en avait deux,
     # la deuxième écrasait la première avec une valeur vide)
-    _PIP_ADDITIONAL_REQUIREMENTS: pandas psycopg2-binary sqlalchemy
+    _PIP_ADDITIONAL_REQUIREMENTS: pandas psycopg2-binary sqlalchemy requests
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
   volumes:
