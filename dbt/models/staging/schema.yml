@@ -85,3 +85,10 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: stg_exchange_rate
+    description: "Dernier taux de change connu (BRL vers USD/EUR), récupéré via l'API Frankfurter"
+    columns:
+      - name: target_usd
+        data_tests:
+          - not_null

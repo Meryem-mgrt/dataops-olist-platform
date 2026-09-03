@@ -10,3 +10,4 @@ sources:
       - name: raw_order_payments
       - name: raw_products
       - name: raw_sellers
+      - name: raw_exchange_rate
