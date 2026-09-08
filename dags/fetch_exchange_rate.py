@@ -39,7 +39,7 @@ def fetch_exchange_rate():
     # si l'API ne répond pas dans ce délai, on abandonne plutôt que
     # de bloquer indéfiniment la tâche (bonne pratique réseau)
     try:
-        response = requests.get(url, timeout=10) # 10 s
+        response = requests.get(url, timeout=10)  # 10 s
         # raise_for_status() lève une erreur si le code HTTP n'est pas 200 (succès)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
@@ -80,13 +80,36 @@ def fetch_exchange_rate():
     logger.info(f"Taux de change du {row['rate_date']} enregistré avec succès.")
 
 
+def task_failure_alert(context):
+    """
+    Callback exécuté automatiquement par Airflow quand une tâche échoue
+    définitivement (après épuisement des retries).
+
+    Ce callback ne fait que LOGUER l'erreur, de façon structurée et lisible.
+    L'envoi de l'email en lui-même est géré séparément et automatiquement
+    par Airflow, grâce aux paramètres email_on_failure / email ci-dessous
+    (les deux mécanismes sont indépendants et complémentaires).
+    """
+    task_instance = context.get('task_instance')
+    logger.error(
+        f"[ALERTE] Échec de la tâche '{task_instance.task_id}' "
+        f"dans le DAG '{task_instance.dag_id}' "
+        f"(run_id : {context.get('run_id')})"
+    )
+
+
 # Arguments par défaut du DAG : mêmes principes que load_olist_to_dw
 # (retries en cas d'échec temporaire, ex. API momentanément indisponible)
 default_args = {
     "owner": "meryem",
     "retries": 2,
     "retry_delay": timedelta(minutes=2),
+    "on_failure_callback": task_failure_alert,
+    "email_on_failure": True,                     # active l'envoi d'email en cas d'échec
+    "email_on_retry": False,                      # pas besoin d'être notifiée à chaque tentative de retry
+    "email": ["meryemmouguert@gmail.com"],  
 }
+
 
 with DAG(
     dag_id="fetch_exchange_rate",              # identifiant unique de ce DAG dans Airflow

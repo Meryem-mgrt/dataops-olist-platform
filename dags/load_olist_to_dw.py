@@ -57,17 +57,30 @@ def load_csv_to_postgres(filename, table_name):
     logger.info(f"{len(df)} lignes chargées avec succès dans {table_name}")
 
 def task_failure_alert(context):
+    """
+    Callback exécuté automatiquement par Airflow quand une tâche échoue
+    définitivement (après épuisement des retries).
+    Ce callback logue l'erreur ; l'envoi de l'email est géré séparément
+    et automatiquement par Airflow via email_on_failure ci-dessous.
+    """
     task_instance = context.get('task_instance')
     logger.error(
         f"[ALERTE] Échec de la tâche '{task_instance.task_id}' "
-        f"dans le DAG '{task_instance.dag_id}' à {context.get('execution_date')}"
+        f"dans le DAG '{task_instance.dag_id}' "
+        f"(run_id : {context.get('run_id')})"
     )
 default_args = {
     "owner": "meryem",
     "retries": 2,
     "retry_delay": timedelta(minutes=2),
-    "on_failure_callback": task_failure_alert,
+    "on_failure_callback": task_failure_alert,  
+    "email_on_failure": True,                     # active l'envoi d'email en cas d'échec
+    "email_on_retry": False,                      # pas besoin d'être notifiée à chaque tentative de retry
+    "email": ["meryemmouguert@gmail.com"],           # destinataire de l'alerte
 }
+
+
+
 
 with DAG(
     dag_id="load_olist_to_dw",

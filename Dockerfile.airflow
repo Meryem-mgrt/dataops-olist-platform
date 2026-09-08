@@ -1,0 +1,18 @@
+# On part de l'image officielle Airflow exacte que tu utilises déjà
+FROM apache/airflow:3.3.0
+
+# Il faut passer en utilisateur root pour pouvoir installer des paquets système
+# (par défaut, l'image tourne avec un utilisateur non-privilégié)
+USER root
+
+# Installation du client Docker (docker-ce-cli) :
+# - curl : pour télécharger le script d'installation Docker
+# - le script officiel installe uniquement le CLI, pas le moteur Docker complet
+#   (le moteur, lui, tourne sur ta machine Windows via Docker Desktop)
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh && \
+    rm get-docker.sh
+
+# On repasse à l'utilisateur Airflow standard (bonne pratique de sécurité :
+# ne pas laisser le conteneur tourner en root une fois la config terminée)
+USER airflow
