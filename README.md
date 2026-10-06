@@ -146,5 +146,4 @@ Projet finalisé — stage PFA, Zenithsoft (2026).
 
 ## Auteure
 
-Meryem Mouguert — 2ᵉ année Ingénieur, Transformation Digitale Industrielle (TDI),
-ENSA Béni Mellal.
+Meryem Mouguert
